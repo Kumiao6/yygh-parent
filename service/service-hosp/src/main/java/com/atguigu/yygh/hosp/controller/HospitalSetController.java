@@ -1,6 +1,7 @@
 package com.atguigu.yygh.hosp.controller;
 
-import com.atguigu.yygh.common.exception.YyghException;
+
+import com.atguigu.yygh.model.hosp.HospitalSet;
 import com.atguigu.yygh.common.result.Result;
 import com.atguigu.yygh.common.utils.MD5;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
@@ -21,7 +22,7 @@ import java.util.Random;
 @Api(tags = "医院设置管理")
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
-//@CrossOrigin
+@CrossOrigin
 public class HospitalSetController {
 
     //注入service
