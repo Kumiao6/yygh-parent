@@ -4,6 +4,7 @@ import com.atguigu.yygh.cmn.mapper.DictMapper;
 import com.atguigu.yygh.model.cmn.Dict;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -12,4 +13,9 @@ import java.util.List;
  */
 public interface DictService extends IService<Dict> {
     List<Dict> findChirData(Long id);
+
+    //导出数据字典接口
+    void exportDictData(HttpServletResponse response);
+
+
 }

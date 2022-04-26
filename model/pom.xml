@@ -49,6 +49,7 @@
             <artifactId>fastjson</artifactId>
             <scope>provided </scope>
         </dependency>
+
     </dependencies>
 
 </project>
