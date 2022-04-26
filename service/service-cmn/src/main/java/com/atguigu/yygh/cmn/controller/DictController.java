@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -30,6 +31,13 @@ public class DictController {
     @GetMapping("/exportData")
     public Result export(HttpServletResponse response) {
         dictService.exportDictData(response);
+        return Result.ok();
+    }
+
+    //导入数据字典接口
+    @PostMapping("/impotData")
+    public Result importData(MultipartFile multipartFile) {
+        dictService.importDictData(multipartFile);
         return Result.ok();
     }
 
