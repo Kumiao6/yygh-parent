@@ -35,7 +35,7 @@ public class DictController {
     }
 
     //导入数据字典接口
-    @PostMapping("/impotData")
+    @PostMapping("importData")
     public Result importData(MultipartFile multipartFile) {
         dictService.importDictData(multipartFile);
         return Result.ok();

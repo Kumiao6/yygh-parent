@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +29,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
 
     //根据数据id查询子数据列表
+    //keyGenerator：key的生成个规则，指定为我们上面redisconfig配置类中指定的生成规则
+    @Cacheable(value = "dict",keyGenerator = "keyGenerator")
     @Override
     public List<Dict> findChirData(Long id) {
         QueryWrapper<Dict> wrapper = new QueryWrapper<>();
@@ -87,6 +91,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
     //导入数据字典
+    //allEntries = true: 方法调用后清空所有缓存
+    @CacheEvict(value = "dict", allEntries=true)
     @Override
     public void importDictData(MultipartFile file) {
         try {
