@@ -1,6 +1,8 @@
 package com.atguigu.hospital.util;
 
+
 import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Slf4j
+@Data
 public class HttpRequestHelper {
 
     //private final static String signKey = "09c1ff67d1ae4999e137f34b0dff1046";

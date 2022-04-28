@@ -30,11 +30,24 @@ public class ApiController {
     @Autowired
     private HospitalService hospitalService;
 
-    @ApiOperation(value = "上传医院")
+/*    @ApiOperation(value = "上传医院")
     @PostMapping("saveHospital")
     public Result saveHospital(HttpServletRequest request) {
         Map<String, Object> paramMap = HttpRequestHelper.switchMap(request.getParameterMap());
 
+        hospitalService.save(paramMap);
+        return Result.ok();
+    }*/
+
+    //上传排班接口
+    @ApiOperation(value = "上传医院")
+    @PostMapping("saveSchedule")
+    public Result saveSchedule(HttpServletRequest request) {
+        //获取传递过来科室信息
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+        //TODO 签名校验
         hospitalService.save(paramMap);
         return Result.ok();
     }
