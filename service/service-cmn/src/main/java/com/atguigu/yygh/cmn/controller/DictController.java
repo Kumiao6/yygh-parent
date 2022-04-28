@@ -34,12 +34,13 @@ public class DictController {
         return Result.ok();
     }
 
-    //导入数据字典接口
+    //导入数据字典
     @PostMapping("importData")
-    public Result importData(MultipartFile multipartFile) {
-        dictService.importDictData(multipartFile);
+    public Result importDict(MultipartFile file) {
+        dictService.importDictData(file);
         return Result.ok();
     }
+
 
 
 

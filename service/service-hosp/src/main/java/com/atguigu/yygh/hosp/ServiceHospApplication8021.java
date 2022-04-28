@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.atguigu")
-public class ServiceHospApplication {
+public class ServiceHospApplication8021 {
     public static void main(String[] args) {
-        SpringApplication.run(ServiceHospApplication.class, args);
+        SpringApplication.run(ServiceHospApplication8021.class, args);
     }
 }
