@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -51,6 +52,13 @@ public class HospitalServiceImpl implements HospitalService {
             hospital.setIsDeleted(0);
             hospitalRepository.save(hospital);
         }
+    }
+
+    //查询医院
+    @Override
+    public Hospital getByHoscode(String hoscode) {
+        Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
+        return hospital;
     }
 
 }
