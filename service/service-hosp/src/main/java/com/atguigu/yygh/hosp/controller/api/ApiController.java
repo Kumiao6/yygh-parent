@@ -11,9 +11,12 @@ import com.atguigu.yygh.hosp.repository.HospitalRepository;
 import com.atguigu.yygh.hosp.service.DepartmentService;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
+import com.atguigu.yygh.hosp.service.ScheduleService;
 import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Hospital;
+import com.atguigu.yygh.model.hosp.Schedule;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
+import com.atguigu.yygh.vo.hosp.ScheduleQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpResponse;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,6 +52,9 @@ public class ApiController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private ScheduleService scheduleService;
 
 /*    @ApiOperation(value = "上传医院")
     @PostMapping("saveHospital")
@@ -194,10 +201,45 @@ public class ApiController {
         return Result.ok();
 
 
+    }
+
+    //上传排班接口
+    @PostMapping("saveSchedule")
+    public Result saveSchedule(HttpServletRequest request){
+        //获取
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+        //TODO加密
+        scheduleService.save(paramMap);
+        return Result.ok();
 
     }
 
+    //查询排班接口
+    @PostMapping("schedule/list")
+    public Result findSchedule(HttpServletRequest request) {
+        //获取传递过来科室信息
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
 
+        //医院编号
+        String hoscode = (String)paramMap.get("hoscode");
+
+        //科室编号
+        String depcode = (String)paramMap.get("depcode");
+        //当前页 和 每页记录数
+        int page = StringUtils.isEmpty(paramMap.get("page")) ? 1 : Integer.parseInt((String)paramMap.get("page"));
+        int limit = StringUtils.isEmpty(paramMap.get("limit")) ? 1 : Integer.parseInt((String)paramMap.get("limit"));
+        //TODO 签名校验
+
+        ScheduleQueryVo scheduleQueryVo = new ScheduleQueryVo();
+        scheduleQueryVo.setHoscode(hoscode);
+        scheduleQueryVo.setDepcode(depcode);
+        //调用service方法
+        Page<Schedule> pageModel = scheduleService.findPageSchedule(page,limit,scheduleQueryVo);
+        return Result.ok(pageModel);
+    }
 
 
 }
