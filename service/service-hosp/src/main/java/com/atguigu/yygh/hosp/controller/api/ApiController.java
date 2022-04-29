@@ -13,11 +13,14 @@ import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Hospital;
+import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -148,6 +151,52 @@ public class ApiController {
         return Result.ok();
 
     }
+
+    //查询排班接口
+    @PostMapping("department/list")
+    public Result findDepartment(HttpServletRequest request){
+        //获取传递过来科室信息
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(parameterMap);
+
+        //医院编号
+        String hoscode = (String) paramMap.get("hoscode");
+
+        //当前页 和 每页记录数
+        int page = StringUtils.isEmpty(parameterMap.get("page")) ? 1 :Integer.parseInt((String) paramMap.get("page"));
+        int limit = StringUtils.isEmpty(parameterMap.get("limit")) ? 1 : Integer.parseInt((String) paramMap.get("limit"));
+
+        //TODO 签名校验
+
+
+        DepartmentQueryVo departmentQueryVO = new DepartmentQueryVo();
+        departmentQueryVO.setHoscode("hoscode");
+
+
+        //调用service方法
+        Page<Department> pageModel1 = departmentService.findPageDepartment(page,limit,departmentQueryVO);
+        return Result.ok(pageModel1);
+    }
+    //删除医院接口
+    @PostMapping("schedule/remove")
+    public Result remove(HttpServletRequest request) {
+        //获取传递过来的科室信息
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+        //获取医院编号和排班编号
+        String hoscode = (String) paramMap.get("hoscode");
+        String depcode = (String) paramMap.get("depcode");
+
+        //TODD签名校验
+        departmentService.remove(hoscode,depcode);
+        return Result.ok();
+
+
+
+    }
+
 
 
 
