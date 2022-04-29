@@ -54,6 +54,7 @@ public class HospitalServiceImpl implements HospitalService {
         }
     }
 
+
     //查询医院
     @Override
     public Hospital getByHoscode(String hoscode) {
