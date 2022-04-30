@@ -18,6 +18,7 @@ import java.util.Queue;
 @Service
 public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, HospitalSet> implements HospitalSetService {
 
+    //2 根据传递过来医院编码，查询数据库，查询签名
     @Override
     public String getSignKey(String hoscode) {
         QueryWrapper<HospitalSet> warpper = new QueryWrapper<>();

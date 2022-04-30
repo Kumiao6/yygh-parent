@@ -7,13 +7,17 @@ import com.atguigu.yygh.hosp.service.DepartmentService;
 import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
 
+import com.atguigu.yygh.vo.hosp.DepartmentVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author ：m
@@ -24,7 +28,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-
+    //上传科室接口
     @Override
     public void save(Map<String, Object> paramMap) {
         //paramMap 转换department对象
@@ -45,7 +49,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             department.setIsDeleted(0);
             departmentRepository.save(department);
         }
-
     }
 
     @Override
@@ -77,4 +80,9 @@ public class DepartmentServiceImpl implements DepartmentService {
             departmentRepository.deleteById(department.getId());
         }
     }
+
+
+
+
+
 }

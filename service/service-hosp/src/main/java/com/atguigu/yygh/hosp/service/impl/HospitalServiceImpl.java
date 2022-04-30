@@ -7,15 +7,15 @@ import com.atguigu.yygh.hosp.repository.HospitalRepository;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.model.hosp.Hospital;
+import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import com.fasterxml.jackson.databind.JsonNode;
 import jdk.nashorn.internal.parser.JSONParser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -27,6 +27,8 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Autowired
     private HospitalRepository hospitalRepository;
+
+
 
     @Override
     public void save(Map<String, Object> paramMap) {
@@ -54,13 +56,19 @@ public class HospitalServiceImpl implements HospitalService {
         }
     }
 
-
-    //查询医院
     @Override
     public Hospital getByHoscode(String hoscode) {
         Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
         return hospital;
     }
+
+
+
+
+
+
+
+
 
 }
 

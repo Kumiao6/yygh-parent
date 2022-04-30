@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
  * @date ：Created in 2022/4/28 22:36
  */
 @Repository
-public interface DepartmentRepository extends MongoRepository<Department, String> {
-    //判断是否存在getHospitalByHoscode
+public interface DepartmentRepository extends MongoRepository<Department,String> {
+    //上传科室接口
     Department getDepartmentByHoscodeAndDepcode(String hoscode, String depcode);
-
-
 }
