@@ -51,6 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
     }
 
+    //根据医院编号，查询医院所有科室列表
     @Override
     public Page<Department> findPageDepartment(int page, int limit, DepartmentQueryVo departmentQueryVo) {
         // 创建Pageable对象，设置当前页和每页记录数
