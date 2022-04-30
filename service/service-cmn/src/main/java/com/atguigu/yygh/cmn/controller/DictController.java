@@ -42,15 +42,14 @@ public class DictController {
     }
 
 
-
-
-
     //根据id查询子节点数据列表
     @ApiOperation(value = "根据数据id查询子数据列表")
     @GetMapping("/findChildData/{id}")
     public Result findChildData(@PathVariable Long id){
-        List<Dict> list = dictService.findChirData(id);
+        List<Dict> list = dictService.findChlidData(id);
         return Result.ok(list);
     }
+
+
 
 }

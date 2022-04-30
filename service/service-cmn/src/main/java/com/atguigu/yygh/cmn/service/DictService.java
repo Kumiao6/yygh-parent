@@ -13,11 +13,19 @@ import java.util.List;
  * @date ：Created in 2022/4/26 08:54
  */
 public interface DictService extends IService<Dict> {
-    List<Dict> findChirData(Long id);
+    List<Dict> findChlidData(Long id);
 
     //导出数据字典接口
     void exportDictData(HttpServletResponse response);
 
     //导入数据字典
     void importDictData(MultipartFile file);
+
+
+    //根据dictcode和value查询
+    String getDictName(String dictCode, String value);
+
+    //根据dictCode获取下级节点
+    List<Dict> findByDictCode(String dictCode);
+
 }
