@@ -5,6 +5,7 @@ import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,14 +22,16 @@ import java.util.List;
  */
 @RestController
 @Api(tags = "医院管理接口")
-@RequestMapping("/admin/hosp/hospital" )
+@RequestMapping("/admin/hosp/hospital")
 public class HospitalController {
 
     @Autowired
     private HospitalService hospitalService;
 
 
+
     //医院列表(条件查询分页)
+    @ApiOperation(value = "医院列表(条件查询分页)")
     @GetMapping("{page}/{limit}")
     public Result listHosp(@PathVariable Integer page,
                            @PathVariable Integer limit,
@@ -38,8 +41,6 @@ public class HospitalController {
         long totalElements = pageModel.getTotalElements();
 
         return Result.ok(pageModel);
-
     }
-
 
 }
