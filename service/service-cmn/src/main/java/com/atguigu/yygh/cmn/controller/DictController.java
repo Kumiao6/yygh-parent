@@ -22,7 +22,7 @@ import java.util.List;
 @Api(tags = "医院字典")
 @RestController
 @RequestMapping("/admin/cmn/dict")
-@CrossOrigin
+//@CrossOrigin
 public class DictController {
 
     @Autowired
@@ -65,6 +65,16 @@ public class DictController {
         String dictName = dictService.getDictName("",value);
         return dictName;
     }
+
+
+    //根据dictCode获取下级节点
+    @ApiOperation(value = "根据dictCode获取下级节点")
+    @GetMapping("findByDictCode/{dictCode}")
+    public Result findByDictCode(@PathVariable String dictCode) {
+        List<Dict> list = dictService.findByDictCode(dictCode);
+        return Result.ok(list);
+    }
+
 
 
 }
