@@ -22,6 +22,7 @@ public interface DepartmentService {
     //删除科室接口
     void remove(String hoscode, String depcode);
 
-
+    //根据医院编号，查询医院所有科室列表
+    List<DepartmentVo> findDeptTree(String hoscode);
 }
 

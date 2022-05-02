@@ -1,0 +1,3 @@
+GET http://localhost:8201/admin/hosp/schedule/getScheduleRule/1/3/1000_2/200040878
+
+GET http://localhost:8201/admin/hosp/schedule/getScheduleRule/1/1/1000_2/200040878
