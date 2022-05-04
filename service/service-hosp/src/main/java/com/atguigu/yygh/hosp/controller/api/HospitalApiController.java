@@ -22,7 +22,6 @@ import java.util.List;
  * @date ：Created in 2022/5/4 17:42
  */
 @RestController
-@Api(tags = "医院管理接口")
 @RequestMapping("/api/hosp/hospital")
 public class HospitalApiController {
 

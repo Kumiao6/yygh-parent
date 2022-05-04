@@ -1,11 +1,14 @@
 package com.atguigu.yygh.hosp.controller;
 
 import com.atguigu.yygh.common.result.Result;
+import com.atguigu.yygh.hosp.service.DepartmentService;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.model.hosp.Hospital;
+import com.atguigu.yygh.vo.hosp.DepartmentVo;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +32,9 @@ public class HospitalController {
     @Autowired
     private HospitalService hospitalService;
 
+
+    @Autowired
+    private DepartmentService departmentService;
 
 
     //医院列表(条件查询分页)
@@ -59,6 +65,20 @@ public class HospitalController {
         Map<String, Object> map = hospitalService.getHospById(id);
 
         return Result.ok(map);
+    }
+
+    @ApiOperation(value = "根据医院编号获取医院预约挂号详情")
+    @GetMapping("findHospDetail/{hoscode}")
+    public Result item(@PathVariable String hoscode) {
+        Map<String, Object> map = hospitalService.item(hoscode);
+        return Result.ok(map);
+    }
+
+    @ApiOperation(value = "根据医院编号获取科室")
+    @GetMapping("department/{hoscode}")
+    public Result idnex(@PathVariable String hoscode){
+        List<DepartmentVo> list = departmentService.findDeptTree(hoscode);
+        return Result.ok(list);
     }
 
 
