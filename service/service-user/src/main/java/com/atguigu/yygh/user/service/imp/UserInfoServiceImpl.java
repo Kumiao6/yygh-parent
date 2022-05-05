@@ -1,6 +1,7 @@
 package com.atguigu.yygh.user.service.imp;
 
 import com.atguigu.yygh.common.exception.YyghException;
+import com.atguigu.yygh.common.helper.JwtHelper;
 import com.atguigu.yygh.common.result.ResultCodeEnum;
 import com.atguigu.yygh.model.user.UserInfo;
 import com.atguigu.yygh.user.mapper.UserInfoMapper;
@@ -72,12 +73,15 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
         map.put("name", name);
 
-        map.put("token", "");
 
 
+        //jwt生成token字符串
+        String token = JwtHelper.createToken(userInfo.getId(), name);
+        map.put("token",token);
 
-
+        //TDDD token生成
         return map;
+
     }
 
 

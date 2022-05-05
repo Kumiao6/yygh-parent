@@ -5,6 +5,10 @@ import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
+/**
+ * @author ：m
+ * @date ：Created in 2022/5/5 09:16
+ */
 public class JwtHelper {
 
     //过期时间
@@ -51,4 +55,3 @@ public class JwtHelper {
         System.out.println(JwtHelper.getUserName(token));
     }
 }
-
