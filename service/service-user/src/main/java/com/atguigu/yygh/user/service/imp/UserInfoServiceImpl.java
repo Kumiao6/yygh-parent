@@ -71,7 +71,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         }
 
         map.put("name", name);
+
         map.put("token", "");
+
+
 
 
         return map;
