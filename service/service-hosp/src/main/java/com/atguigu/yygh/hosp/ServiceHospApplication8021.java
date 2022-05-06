@@ -10,7 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.atguigu")
-//@ComponentScan("com.atguigu")
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.atguigu")
 public class ServiceHospApplication8021 {
