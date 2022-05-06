@@ -1,18 +1,13 @@
 package com.atguigu.yygh.hosp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.yygh.common.helper.HttpRequestHelper;
-import com.atguigu.yygh.common.result.Result;
 import com.atguigu.yygh.hosp.repository.ScheduleRepository;
 import com.atguigu.yygh.hosp.service.DepartmentService;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.hosp.service.ScheduleService;
-import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Schedule;
 import com.atguigu.yygh.vo.hosp.BookingScheduleRuleVo;
 import com.atguigu.yygh.vo.hosp.ScheduleQueryVo;
-import com.sun.deploy.appcontext.AppContext;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
@@ -24,9 +19,8 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

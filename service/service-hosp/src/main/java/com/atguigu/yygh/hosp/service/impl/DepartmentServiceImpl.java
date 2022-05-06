@@ -8,8 +8,6 @@ import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
 
 import com.atguigu.yygh.vo.hosp.DepartmentVo;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sun.tools.classfile.ConstantPool;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
