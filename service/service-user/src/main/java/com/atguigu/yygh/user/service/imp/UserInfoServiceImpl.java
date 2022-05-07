@@ -3,10 +3,12 @@ package com.atguigu.yygh.user.service.imp;
 import com.atguigu.yygh.common.exception.YyghException;
 import com.atguigu.yygh.common.helper.JwtHelper;
 import com.atguigu.yygh.common.result.ResultCodeEnum;
+import com.atguigu.yygh.model.cmn.Dict;
 import com.atguigu.yygh.model.user.UserInfo;
 import com.atguigu.yygh.user.mapper.UserInfoMapper;
 import com.atguigu.yygh.user.service.UserInfoService;
 import com.atguigu.yygh.vo.user.LoginVo;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,14 @@ import java.util.Map;
  * @date ：Created in 2022/5/4 23:43
  */
 @Service
-public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
+public class UserInfoServiceImpl  extends
+        ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
+
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
 
     @Override
     public Map<String, Object> loginUser(LoginVo loginVo) {
@@ -83,6 +90,16 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         return map;
 
     }
+    //判断数据库中是否已经存在微信的扫码人信息
+    //根据openid判断
+    @Override
+    public UserInfo selectWxInfoOpenId(String openid) {
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid",openid);
+        UserInfo userInfo = baseMapper.selectOne(queryWrapper);
+        return userInfo;
+    }
+
 
 
 }
