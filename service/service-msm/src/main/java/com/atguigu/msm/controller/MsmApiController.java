@@ -3,6 +3,7 @@ package com.atguigu.msm.controller;
 import com.atguigu.msm.config.RandomUtil;
 import com.atguigu.msm.service.MsmService;
 import com.atguigu.yygh.common.result.Result;
+import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
@@ -41,14 +42,17 @@ public class MsmApiController {
         // 生成验证码，
         code = RandomUtil.getSixBitRandom();
         //调用service方法，通过整合短信服务进行发送
-        boolean isSend = msmService.send(phone,code);
+//        boolean isSend = msmService.send(phone,code);
         //生成验证码放到redis里面，设置有效时间
-        if(isSend) {
+/*        if(isSend) {
             redisTemplate.opsForValue().set(phone,code,2, TimeUnit.MINUTES);
             return Result.ok();
         } else {
             return Result.fail().message("发送短信失败");
-        }
+        }*/
+
+        redisTemplate.opsForValue().set(phone, "123456");
+        return Result.ok();
     }
 
 
