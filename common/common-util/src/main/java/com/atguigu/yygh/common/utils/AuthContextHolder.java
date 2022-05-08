@@ -24,4 +24,15 @@ public class AuthContextHolder {
         String userName = JwtHelper.getUserName(token);
         return userName;
     }
+
+
+    //获取当前用户id
+    public static Long getUserId1(HttpServletRequest request){
+        String token = request.getHeader("token");
+        Long userId = JwtHelper.getUserId(token);
+
+        return userId;
+
+    }
+
 }
