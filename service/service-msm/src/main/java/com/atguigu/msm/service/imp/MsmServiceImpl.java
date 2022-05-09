@@ -11,6 +11,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.atguigu.msm.config.ConstantPropertiesUtils;
 import com.atguigu.msm.service.MsmService;
+import com.atguigu.yygh.vo.msm.MsmVo;
 import com.cloopen.rest.sdk.BodyType;
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
 import org.springframework.stereotype.Service;
@@ -112,11 +113,15 @@ public class MsmServiceImpl implements MsmService {
 
     }
 
-
-
-
-
-
+    //mq发送短信封装
+    @Override
+    public boolean send(MsmVo msmVo) {
+        if(!StringUtils.isEmpty(msmVo.getPhone())) {
+            boolean isSend = this.send(msmVo.getPhone(), msmVo.getPhone());
+            return isSend;
+        }
+        return false;
+    }
 
 
 }
