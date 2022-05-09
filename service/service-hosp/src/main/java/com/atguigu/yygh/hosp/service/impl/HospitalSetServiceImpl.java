@@ -27,4 +27,19 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
         HospitalSet hospitalSet = baseMapper.selectOne(warpper);
         return hospitalSet.getSignKey();
     }
+
+    //获取医院签名信息
+    @Override
+    public SignInfoVo getSignInfoVo(String hoscode) {
+        QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
+        wrapper.eq("hoscode",hoscode);
+        HospitalSet hospitalSet = baseMapper.selectOne(wrapper);
+        if(null == hospitalSet) {
+            throw new YyghException(ResultCodeEnum.HOSPITAL_OPEN);
+        }
+        SignInfoVo signInfoVo = new SignInfoVo();
+        signInfoVo.setApiUrl(hospitalSet.getApiUrl());
+        signInfoVo.setSignKey(hospitalSet.getSignKey());
+        return signInfoVo;
+    }
 }
