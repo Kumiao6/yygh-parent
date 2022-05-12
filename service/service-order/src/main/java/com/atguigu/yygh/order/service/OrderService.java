@@ -20,4 +20,8 @@ public interface OrderService extends IService<OrderInfo> {
 
     //根据订单id查询订单详情
     OrderInfo getOrder(String orderId);
+
+
+    //取消预约
+    Boolean cancelOrder(Long orderId);
 }
