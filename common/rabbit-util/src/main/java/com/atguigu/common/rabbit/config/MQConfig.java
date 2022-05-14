@@ -13,7 +13,6 @@ import javax.xml.ws.handler.MessageContext;
  */
 @Configuration
 public class MQConfig {
-
     @Bean
     public MessageConverter messageConverter(){
         return new Jackson2JsonMessageConverter();
