@@ -5,6 +5,7 @@ import com.atguigu.yygh.common.utils.AuthContextHolder;
 import com.atguigu.yygh.enums.OrderStatusEnum;
 import com.atguigu.yygh.model.order.OrderInfo;
 import com.atguigu.yygh.order.service.OrderService;
+import com.atguigu.yygh.vo.order.OrderCountQueryVo;
 import com.atguigu.yygh.vo.order.OrderQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author ：m
@@ -32,7 +34,7 @@ public class OrderApiController {
     @PostMapping("auth/submitOrder/{scheduleId}/{patientId}")
     public Result savaOrders(@PathVariable String scheduleId,
                              @PathVariable Long patientId) {
-        Long orderId = orderService.saveOrder(scheduleId,patientId);
+        Long orderId = orderService.saveOrder(scheduleId, patientId);
         return Result.ok(orderId);
     }
 
@@ -43,9 +45,9 @@ public class OrderApiController {
                        OrderQueryVo orderQueryVo, HttpServletRequest request) {
         //设置当前用户id
         orderQueryVo.setUserId(AuthContextHolder.getUserId(request));
-        Page<OrderInfo> pageParam = new Page<>(page,limit);
+        Page<OrderInfo> pageParam = new Page<>(page, limit);
         IPage<OrderInfo> pageModel =
-                orderService.selectPage(pageParam,orderQueryVo);
+                orderService.selectPage(pageParam, orderQueryVo);
         return Result.ok(pageModel);
     }
 
@@ -64,4 +66,9 @@ public class OrderApiController {
 
 
 
+    @ApiOperation(value = "获取订单统计数据")
+    @PostMapping("inner/getCountMap")
+    public Map<String, Object> getCountMap(@RequestBody OrderCountQueryVo orderCountQueryVo) {
+        return orderService.getCountMap(orderCountQueryVo);
+    }
 }
